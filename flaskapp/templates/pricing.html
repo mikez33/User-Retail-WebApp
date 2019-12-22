@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div class= "jumbotron">
+		<h1 class= "display-3">One Month Subscription</h1>
+		<p class="lead">Available now for $12/Month</p>
+		{% if current_user.is_authenticated %}
+			<form action="{{ url_for('pay') }}" method="POST">
+	          <script
+	            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+	            data-key="{{ STRIPE_PUBLIC_KEY }}"
+	            data-amount="1200"
+	            data-name="Tomo Software"
+	            data-description="One Month Subscription"
+	            data-locale="auto">
+	          </script>
+	        </form><br>
+	        <p class= "lead">or</p>
+	        <div id="paypal-button"></div>
+				<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+				<script>
+				    var CREATE_PAYMENT_URL  = 'http://127.0.0.1:5000/paypal';
+				    var EXECUTE_PAYMENT_URL = 'http://127.0.0.1:5000/execute';
+				    paypal.Button.render({
+				        env: 'sandbox', // Or 'sandbox'
+				        commit: true, // Show a 'Pay Now' button
+
+				        payment: function() {
+				            return paypal.request.post(CREATE_PAYMENT_URL).then(function(data) {
+				                return data.paymentID;
+				            });
+				        },
+
+				        onAuthorize: function(data) {
+				            return paypal.request.post(EXECUTE_PAYMENT_URL, {
+				                paymentID: data.paymentID,
+				                payerID:   data.payerID
+				            }).then(function(res) {
+				                console.log(res.success)
+				                // The payment is complete!
+				                // You can now show a confirmation message to the customer
+				            });
+				        }
+				    }, '#paypal-button');
+				</script>
+			{% else %}
+				<p class="lead">Please login to purchase!</p>
+			{% endif %}
+
+	</div>
+{% endblock content %}
