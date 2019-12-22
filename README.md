@@ -1,6 +1,6 @@
 # Open Market
 
-Website for the Tomo project
+Website for the Open Market Web Application project
 
 ## Running locally
 
