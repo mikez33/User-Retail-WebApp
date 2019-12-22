@@ -1,4 +1,4 @@
-# Tomo Website
+# Open Market
 
 Website for the Tomo project
 
