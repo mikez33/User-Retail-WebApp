@@ -42,8 +42,13 @@ export class AuthService {
 	}
 
 	async signOut() {
-		await this.afAuth.auth.signOut();
-		return this.router.navigate(['/']);
+		await this.afAuth.auth.signOut().then(function() {
+			window.location.assign('https://accounts.google.com/Logout');
+			this.router.navigate(['/']);
+		})
+		.catch(function(error) {
+			console.log(error);
+		});
 	}
 
 	private updateUserData(User) {
