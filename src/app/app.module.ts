@@ -12,6 +12,7 @@ import { ComponentsComponent } from './components/components.component';
 import { HeaderComponent } from './components/layout/header/header.component';
 import { AboutComponent } from './components/pages/about/about.component';
 import { HomeComponent } from './components/pages/home/home.component';
+import { SuperSecretComponent } from './super-secret/super-secret.component';
 
 const firebaseConfig = {
     apiKey: "AIzaSyD8pPJNfaDDJdlkgN13onJlECW7uW9E610",
@@ -30,7 +31,8 @@ const firebaseConfig = {
     ComponentsComponent,
     HeaderComponent,
     AboutComponent,
-    HomeComponent
+    HomeComponent,
+    SuperSecretComponent
   ],
   imports: [
     BrowserModule,
