@@ -12,16 +12,14 @@
 				</div>
 				<!-- Navbar Right Side -->
 				<!-- if current_user.is_authenticated -->
-
-				<div class="navbar-nav navbar-right" *ngIf="auth.user$ | async as user; else login">
+				<div class="navbar-nav navbar-right" *ngIf="user">
 					<a type="button" class="nav-item nav-link" routerLink="/account">Account</a>
-					<a type="button" class="nav-item nav-link" style="color: #ffffff;" (click)="auth.signOut()">Logout</a>
+					<a type="button" class="nav-item nav-link" style="color: #ffffff;" (click)="logout()">Logout</a>
 				</div>
 				<!-- {% else %} -->
-				<div class="navbar-nav navbar-right">
-					<ng-template #login>
-						<a type="button" class="nav-item nav-link" style="color: #ffffff;" (click)="auth.googleSignIn()">Login or Register</a>
-					</ng-template>
+				<div class="navbar-nav navbar-right" *ngIf="!user">
+					<a type="button" class="nav-item nav-link" style="color: #ffffff;" routerLink="/login">Login</a>
+					<a type="button" class="nav-item nav-link" style="color: #ffffff;" routerLink="/register">Register</a>
 				</div>
 				<!-- {% endif %} -->
 			</div>

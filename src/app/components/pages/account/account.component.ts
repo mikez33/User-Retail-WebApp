@@ -4,6 +4,7 @@ import { AuthService } from '../../../services/auth.service';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 
 @Component({
   selector: 'app-account',
@@ -11,10 +12,16 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-
+  photoURL;
   constructor(
-  	public authService: AuthService,
-  ) {}
+  	public authService: AuthService, 
+    private db : AngularFireDatabase, 
+    private afAuth : AngularFireAuth
+  ) {
+    this.db.database.ref().child("Users").on("value", (snapshot) => {
+      this.photoURL = snapshot.val().photoURL;
+    })
+  }
 
   ngOnInit() {
   }
@@ -24,11 +31,11 @@ export class AccountComponent implements OnInit {
   }
 
   public getPhotoURL() {
-  	return this.authService.userPhotoURL();
+  	return this.photoURL;
   }
 
   public getBio() {
-  	return this.authService.userBio(this.authService.currentUser());
+  	
   }
 
 }
