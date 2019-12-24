@@ -28,7 +28,7 @@ export class AccountComponent implements OnInit {
   }
 
   public getBio() {
-  	return this.authService.userBio(this.authService.user$);
+  	return this.authService.userBio(this.authService.currentUser());
   }
 
 }

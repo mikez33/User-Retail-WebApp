@@ -82,6 +82,10 @@ export class AuthService {
 		return userRef.set(data, {merge : true});
 	}
 
+	public currentUser() {
+		return this.afAuth.auth.currentUser;
+	}
+
 	public userDisplayName() {
 		const user = this.afAuth.auth.currentUser;
 		if (user != null) {
@@ -102,15 +106,15 @@ export class AuthService {
 
 	public userBio(User) {
 		//const user = auth.GoogleAuthProvider().cre;
-		//const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${User.uid}`);
+		const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${User.bio}`);
 		let user: User = {
    			uid: User.uid, 
 			email: User.email,
 			displayName: User.displayName,
 			photoURL: User.photoURL,
-			bio: "ewerw"
+			bio: User.bio
 		} 
-		return user.bio;
+		return user.bio
 	}
 }
 
