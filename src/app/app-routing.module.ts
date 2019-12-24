@@ -2,13 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent} from './components/pages/home/home.component';
 import { AboutComponent} from './components/pages/about/about.component';
+import { AccountComponent } from './components/pages/account/account.component';
 import { SuperSecretComponent} from './super-secret/super-secret.component';
 import { AuthGuard } from './services/auth.guard';
+
 
 
 const routes: Routes = [
 	{path: '', component: HomeComponent}, 
 	{path: 'about', component: AboutComponent},
+	{path: 'account', component: AccountComponent},
 	{path: 'secret', component: SuperSecretComponent, canActivate: [AuthGuard]}
 ];
 

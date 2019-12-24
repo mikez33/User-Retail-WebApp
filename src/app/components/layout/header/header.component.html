@@ -14,7 +14,7 @@
 				<!-- if current_user.is_authenticated -->
 
 				<div class="navbar-nav navbar-right" *ngIf="auth.user$ | async as user; else login">
-					<a type="button" class="nav-item nav-link" routerlink="/account">Account</a>
+					<a type="button" class="nav-item nav-link" routerLink="/account">Account</a>
 					<a type="button" class="nav-item nav-link" style="color: #ffffff;" (click)="auth.signOut()">Logout</a>
 				</div>
 				<!-- {% else %} -->
@@ -28,20 +28,7 @@
 		</div>
 	</nav>
 </header>
-<main role="main" class="container">
-	<div class="row">
-		<div class="col-md-8">
-				<!-- {% with messages = get_flashed_messages(with_categories=true) %}
-					{% if messages %}
-					{% for category, message in messages %} -->
-				<div class="alert alert-{{ category }}">
-						{{ message }}
-				</div>
-							<!-- {% endfor %}
-						{% endif %}
-					{% endwith %}
-					{% block content %}{% endblock %} -->
-		</div>
+
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

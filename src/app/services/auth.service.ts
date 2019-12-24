@@ -58,5 +58,23 @@ export class AuthService {
 
 		return userRef.set(data, {merge: true});
 	}
+
+	public userDisplayName() {
+		const user = this.afAuth.auth.currentUser;
+		if (user != null) {
+			return user.displayName;
+		} else {
+			return "";
+		}
+	}
+
+	public userPhotoURL() {
+		const user = this.afAuth.auth.currentUser;
+		if (user != null) {
+			return user.photoURL;
+		} else {
+			return "";
+		}
+	}
 }
 
