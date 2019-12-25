@@ -14,28 +14,16 @@ import { AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 export class AccountComponent implements OnInit {
   photoURL;
   constructor(
-  	public authService: AuthService, 
-    private db : AngularFireDatabase, 
-    private afAuth : AngularFireAuth
+  	public auth: AuthService, 
+    // private db : AngularFireDatabase, 
+    // private afAuth : AngularFireAuth
   ) {
-    this.db.database.ref().child("Users").on("value", (snapshot) => {
-      this.photoURL = snapshot.val().photoURL;
-    })
+    // this.db.database.ref().child("Users").on("value", (snapshot) => {
+    //   this.photoURL = snapshot.val().photoURL;
+    // })
   }
 
   ngOnInit() {
-  }
-
-  public getDisplayName() {
-  	return this.authService.userDisplayName();
-  }
-
-  public getPhotoURL() {
-  	return this.photoURL;
-  }
-
-  public getBio() {
-  	
   }
 
 }
