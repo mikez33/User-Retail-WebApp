@@ -20,7 +20,7 @@
 					<a type="button" class="nav-item nav-link" style="color: #ffffff;" (click)="auth.signOut()">Logout</a>
 				</div>
 				<div class="navbar-nav navbar-right" *ngIf="!(auth.user | async)">
-					<a type="button" class="nav-item nav-link" style="color: #ffffff;" (click)="auth.googleLogin()">Login</a>
+					<a type="button" class="nav-item nav-link" style="color: #ffffff;" routerLink="/login">Login</a>
 					<a type="button" class="nav-item nav-link" style="color: #ffffff;" routerLink="/register">Register</a>
 				</div>
 			</div>
