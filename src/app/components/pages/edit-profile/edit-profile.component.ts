@@ -7,19 +7,21 @@ import { AuthService } from '../../../services/auth.service';
 	styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent implements OnInit {
+	user;
 	firstName;
 	authError: any;
 	constructor(public auth: AuthService) { 
 		this.auth.eventAuthError$.subscribe(data => {
 			this.authError = data;
-		})
+		});
+		this.user = auth.user;
 	}
 
 	ngOnInit() {
 	}
 
-	updateUser(frm) {
-		this.auth.update(frm.value);
+	updateUser(frm, user) {
+		this.auth.update(frm.value, user);
 	}
 
 }

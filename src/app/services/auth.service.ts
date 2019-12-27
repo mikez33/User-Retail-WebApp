@@ -70,19 +70,31 @@ export class AuthService {
 			});
 	}
 
-	update(user) {
+	update(user, prev: User) {
 		const curr = this.afAuth.auth.currentUser;
 		return this.afs.doc(`users/${curr.uid}`).set({
-			firstName: user.firstName,
-			lastName: user.lastName,
-			displayName: user.firstName + ' ' + user.lastName,
-			email: user.email,
+			firstName: (user.firstName === "") ? prev.firstName: user.firstName,
+			lastName: (user.lastName === "") ? prev.lastName: user.lastName,
+			displayName: this.getDisplayName(user, prev),
+			email: (user.email === "") ? prev.email : user.email,
 			uid: curr.uid,
-			bio: user.bio,
+			bio: (user.bio === "") ? prev.bio : user.bio,
 			photoURL: "https://i.stack.imgur.com/dr5qp.jpg"
 		}).then(() => {
 			this.router.navigate(['/account']);
 		})
+	}
+
+	getDisplayName(curr, prev) {
+		if (curr.firstName === "" && curr.lastName === "") {
+			return prev.firstName + " " + prev.lastName;
+		} else if (curr.firstName === " ") {
+			prev.firstName + " " + curr.lastName;
+		} else if (curr.lastName === " ") {
+			curr.firstName + " " + prev.lastName;
+		} else {
+			curr.firstName + " " + curr.lastName;
+		}
 	}
 
 	insertUserData(userCredential: firebase.auth.UserCredential, first: string, last: string) {
