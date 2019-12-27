@@ -1,0 +1,51 @@
+<div class="container">
+	<div class="row mt-3">
+		<div class="col-12">
+			<h4>Edit Your Profile</h4>
+		</div>
+		<div class="col-12">
+		<div class="row" *ngIf="authError">
+			<div class="col-12 alert alert-danger">
+				{{ authError?.message }}
+			</div>
+		</div>
+		<form #userRegForm="ngForm" (ngSubmit)="updateUser(userRegForm)" *ngIf="auth.user | async as user">
+			<div class="row">
+				<div class="col-md-6 mb-2">
+					<label for="firstName">First name</label>
+					<input ngModel #firstname="ngModel" name="firstName" type="text" class="form-control" id="firstName">
+				</div>
+				<div class="col-md-6 mb-2">
+					<label for="lastName">Last name</label>
+					<input ngModel #lastname="ngModel" name="lastName" type="text" class="form-control" id="lastName" value="" placeholder="user.lastName">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 mb-2">
+					<label for="email">Email</label>
+					<input ngModel #email="ngModel" name="email" type="email" class="form-control">
+				</div>
+			</div>
+			<div>
+				<div class="row">
+					<div class="col-md-12 mb-2">
+						<label for="bio">Bio</label>
+						<input ngModel #bio="ngModel" name="bio" type="bio" class="form-control">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 mb-2">
+						<!-- <label>Upload a Photo</label>
+						<input ngModel #photoURL="ngModel" name="photoURL" type="photoURL" class="form-control"> -->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<button class="btn btn-primary" type="submit">Submit</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	</div>
+</div>

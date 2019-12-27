@@ -19,6 +19,7 @@ import { SuperSecretComponent } from './super-secret/super-secret.component';
 import { AccountComponent } from './components/pages/account/account.component';
 import { RegistrationComponent } from './components/pages/registration/registration.component';
 import { LoginComponent } from './components/pages/login/login.component';
+import { EditProfileComponent } from './components/pages/edit-profile/edit-profile.component';
 
 const firebaseConfig = {
     apiKey: "AIzaSyD8pPJNfaDDJdlkgN13onJlECW7uW9E610",
@@ -41,7 +42,8 @@ const firebaseConfig = {
     SuperSecretComponent,
     AccountComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

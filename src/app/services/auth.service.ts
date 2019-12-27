@@ -4,11 +4,14 @@ import { Router } from '@angular/router';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import * as firebase from 'firebase';
 
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { switchMap} from 'rxjs/operators';
 
 interface User {
+	firstName: string;
+	lastName: string;
 	uid: string;
 	email: string;
 	photoURL?: string;
@@ -29,7 +32,7 @@ export class AuthService {
 	constructor(
 		private afAuth: AngularFireAuth,
 		private afs: AngularFirestore,
-		private router: Router
+		private router: Router,
 		) {
 
 		//// Get auth data, then get firestore user document || null
@@ -67,11 +70,28 @@ export class AuthService {
 			});
 	}
 
+	update(user) {
+		const curr = this.afAuth.auth.currentUser;
+		return this.afs.doc(`users/${curr.uid}`).set({
+			firstName: user.firstName,
+			lastName: user.lastName,
+			displayName: user.firstName + ' ' + user.lastName,
+			email: user.email,
+			uid: curr.uid,
+			bio: user.bio,
+			photoURL: "https://i.stack.imgur.com/dr5qp.jpg"
+		}).then(() => {
+			this.router.navigate(['/account']);
+		})
+	}
+
 	insertUserData(userCredential: firebase.auth.UserCredential, first: string, last: string) {
 		return this.afs.doc(`users/${userCredential.user.uid}`).set({
 			displayName: first + ' ' + last,
+			firstName: first,
+			lastName: last,
 			email: this.newUser.email, 
-			uid: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+			uid: userCredential.user.uid,
 			bio: "this is the default bio",
 			photoURL: "https://i.stack.imgur.com/dr5qp.jpg",
 		});
@@ -107,8 +127,11 @@ export class AuthService {
 		// Sets user data to firestore on login
 
 		const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+		let names = user.displayName.split(" ");
 
 		const data: User = {
+			firstName: names[0],
+			lastName: names[1],
 			uid: user.uid,
 			email: user.email,
 			displayName: user.displayName,

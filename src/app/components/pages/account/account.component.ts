@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
+import { AuthService } from '../../../services/auth.service';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -15,6 +16,7 @@ export class AccountComponent implements OnInit {
   photoURL;
   constructor(
   	public auth: AuthService, 
+    public router: Router,
     // private db : AngularFireDatabase, 
     // private afAuth : AngularFireAuth
   ) {
@@ -24,6 +26,10 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  editProfile() {
+    this.router.navigate(['edit_profile']);
   }
 
 }

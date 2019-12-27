@@ -16,12 +16,12 @@
 				</div>
 				<!-- Navbar Right Side -->
 				<div class="navbar-nav navbar-right" *ngIf="auth.user | async">
-					<a type="button" class="nav-item nav-link" routerLink="/account">Account</a>
-					<a type="button" class="nav-item nav-link" style="color: #ffffff;" (click)="auth.signOut()">Logout</a>
+					<a type="button" class="nav-item nav-link" routerLink="/account" >Account</a>
+					<a type="button" class="nav-item nav-link" (click)="auth.signOut()">Logout</a>
 				</div>
 				<div class="navbar-nav navbar-right" *ngIf="!(auth.user | async)">
-					<a type="button" class="nav-item nav-link" style="color: #ffffff;" routerLink="/login">Login</a>
-					<a type="button" class="nav-item nav-link" style="color: #ffffff;" routerLink="/register">Register</a>
+					<a type="button" class="nav-item nav-link" routerLink="/login">Login</a>
+					<a type="button" class="nav-item nav-link" routerLink="/register">Register</a>
 				</div>
 			</div>
 		</div>
