@@ -6,6 +6,7 @@ let gcs = new Storage ({
 });
 const os = require('os');
 const path = require('path');
+const spawn = require('child-process-promise').spawn;
 
 
 
@@ -16,8 +17,8 @@ exports.onFileChange = functions.storage.object().onFinalize(event => {
 	const filePath = event.name;
 	console.log('file detected')
 
-	if(path.basename(filePath).startsWith('renamed-')){
-		console.log('already renamed this file')
+	if(path.basename(filePath).startsWith('resized-')){
+		console.log('already resized this file')
 		return;
 	}
 
@@ -27,12 +28,14 @@ exports.onFileChange = functions.storage.object().onFinalize(event => {
 	return destBucket.file(filePath).download({
 		destination : tmpFilePath
 	}).then(() => {
+        return spawn('convert', [tmpFilePath, '-resize', '500x500', tmpFilePath]);
+    }).then(() => {
 		return destBucket.upload(tmpFilePath, {
-			destination:'renamed-'+ path.basename(filePath),
+			destination:'resized-'+ path.basename(filePath),
 			metadata: metadata
 		}) 
 
-		
+
 	})
 
 });
