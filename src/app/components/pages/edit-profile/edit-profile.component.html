@@ -17,7 +17,7 @@
 				</div>
 				<div class="col-md-6 mb-2">
 					<label for="lastName">Last name</label>
-					<input ngModel #lastname="ngModel" name="lastName" type="text" class="form-control" id="lastName" value="" placeholder="{{ user.lastName }}" value="{{ user.lastName }}">
+					<input ngModel #lastname="ngModel" name="lastName" type="text" class="form-control" id="lastName" id="lastName" placeholder="{{ user.lastName }}" value="{{ user.lastName }}">
 				</div>
 			</div>
 			<div class="row">
@@ -26,19 +26,21 @@
 					<input ngModel #email="ngModel" name="email" type="email" class="form-control" placeholder="{{ user.email }}" value="{{ user.email }}">
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-md-12 mb-2">
+					<label for="bio">Bio</label>
+					<input ngModel #bio="ngModel" name="bio" type="bio" class="form-control" placeholder="{{ user.bio }}" value="{{ user.bio }}">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 mb-2">
+				<!-- <label>Upload a Photo</label>
+					<input ngModel #photoURL="ngModel" name="photoURL" type="photoURL" class="form-control"> -->
+					<!-- <label for="photoURL">Select Image</label><br>
+					<input ngModel #photoURL="ngModel" type="file" accept="image/*" placeholder="{{ user.photoURL }}" value="{{ user.photoURL }}"> -->
+				</div>
+			</div>
 			<div>
-				<div class="row">
-					<div class="col-md-12 mb-2">
-						<label for="bio">Bio</label>
-						<input ngModel #bio="ngModel" name="bio" type="bio" class="form-control" placeholder="{{ user.bio }}" value="{{ user.bio }}">
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12 mb-2">
-						<!-- <label>Upload a Photo</label>
-						<input ngModel #photoURL="ngModel" name="photoURL" type="photoURL" class="form-control"> -->
-					</div>
-				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<button class="btn btn-primary" type="submit">Submit</button>

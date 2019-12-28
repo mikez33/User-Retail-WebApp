@@ -79,7 +79,7 @@ export class AuthService {
 			email: (user.email === "") ? prev.email : user.email,
 			uid: curr.uid,
 			bio: (user.bio === "") ? prev.bio : user.bio,
-			photoURL: "https://i.stack.imgur.com/dr5qp.jpg"
+			photoURL: "https://i.stack.imgur.com/dr5qp.jpg",
 		}).then(() => {
 			this.router.navigate(['/account']);
 		})
@@ -87,13 +87,13 @@ export class AuthService {
 
 	getDisplayName(curr, prev) {
 		if (curr.firstName === "" && curr.lastName === "") {
-			return prev.firstName + " " + prev.lastName;
-		} else if (curr.firstName === " ") {
-			prev.firstName + " " + curr.lastName;
-		} else if (curr.lastName === " ") {
-			curr.firstName + " " + prev.lastName;
+			return prev.displayName;
+		} else if (curr.firstName === "") {
+			return prev.firstName + " " + curr.lastName;
+		} else if (curr.lastName === "") {
+			return curr.firstName + " " + prev.lastName;
 		} else {
-			curr.firstName + " " + curr.lastName;
+			return curr.firstName + " " + curr.lastName;
 		}
 	}
 
@@ -129,8 +129,13 @@ export class AuthService {
 	private oAuthLogin(provider) {
 		return this.afAuth.auth.signInWithPopup(provider)
 		.then((credential) => {
-			this.updateUserData(credential.user)
-			this.router.navigate(['home'])
+			if (credential.additionalUserInfo.isNewUser) {
+				this.updateUserData(credential.user);
+				this.router.navigate(['home']);
+			} else {
+				this.router.navigate(['home']);
+			}
+			//this.updateUserData(credential.user)
 		})
 	}
 

@@ -21,7 +21,18 @@ export class EditProfileComponent implements OnInit {
 	}
 
 	updateUser(frm, user) {
+		//let url = this.processFile(frm.value.photoURL);
 		this.auth.update(frm.value, user);
+	}
+
+	processFile(imageInput : File) {
+		let data;
+		let reader = new FileReader();
+		reader.readAsDataURL(imageInput);
+		reader.onloadend = function() {
+			data = reader.result;
+		}
+		return data;
 	}
 
 }
