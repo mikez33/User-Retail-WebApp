@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+// import { ngImgur } from 'ng-imgur';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -49,6 +51,7 @@ const firebaseConfig = {
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    HttpClientModule,
      // Initialize Firebase
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule, // firestore

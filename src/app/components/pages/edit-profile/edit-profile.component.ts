@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
+// import { Imgur } from'../../../../../node_modules/ng-imgur';
 
 @Component({
 	selector: 'app-edit-profile',
@@ -21,7 +22,9 @@ export class EditProfileComponent implements OnInit {
 	}
 
 	updateUser(frm, user) {
-		//let url = this.processFile(frm.value.photoURL);
+		// let url = this.controller.upload(frm.value.photoURL).then(function then(model) {
+		// 	return model.link
+		// });
 		this.auth.update(frm.value, user);
 	}
 

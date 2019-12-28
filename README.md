@@ -12,6 +12,12 @@ Install Firebase and Angular Firebase from the node.js terminal.
 
 Run `npm install @angular/fire firebase --savenpm install`
 
+## Imgur
+
+Install Imgur from the node.js terminal
+
+Run `npm i ng-imgur`
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.

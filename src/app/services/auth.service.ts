@@ -79,7 +79,7 @@ export class AuthService {
 			email: (user.email === "") ? prev.email : user.email,
 			uid: curr.uid,
 			bio: (user.bio === "") ? prev.bio : user.bio,
-			photoURL: "https://i.stack.imgur.com/dr5qp.jpg",
+			photoURL: user.photoURL,
 		}).then(() => {
 			this.router.navigate(['/account']);
 		})
