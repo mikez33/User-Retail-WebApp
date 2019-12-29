@@ -79,7 +79,6 @@ export class AuthService {
 			email: (user.email === "") ? prev.email : user.email,
 			uid: curr.uid,
 			bio: (user.bio === "") ? prev.bio : user.bio,
-			photoURL: user.photoURL,
 		}).then(() => {
 			this.router.navigate(['/account']);
 		})

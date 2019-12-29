@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -59,7 +59,7 @@ const firebaseConfig = {
     AngularFireStorageModule, // storage  
     AngularFireDatabaseModule
   ],
-  providers: [AngularFireDatabase],
+  providers: [AngularFireDatabase, AngularFireStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

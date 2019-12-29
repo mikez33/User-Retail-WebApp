@@ -36,8 +36,10 @@
 				<div class="col-md-12 mb-2">
 				<!-- <label>Upload a Photo</label>
 					<input ngModel #photoURL="ngModel" name="photoURL" type="photoURL" class="form-control"> -->
-					<!-- <label for="photoURL">Select Image</label><br>
-					<input ngModel #photoURL="ngModel" type="file" accept="image/*" placeholder="{{ user.photoURL }}" value="{{ user.photoURL }}"> -->
+					<label>Select Image</label><br>
+					<input type="file" accept="image/*" (change)="onFileSelected($event)" #fileInput>
+					<button type="button" class="btn btn-primary btn-dark" (click)="fileInput.click()">Pick File</button>
+					<button type="button" class="btn btn-primary btn-dark" (click)="uploadProfile(user.uid)">Upload</button>
 				</div>
 			</div>
 			<div>
