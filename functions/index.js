@@ -1,9 +1,9 @@
 const functions = require('firebase-functions')
 const { Storage } = require('@google-cloud/storage');
 const projectId = 'user-retail-webapp';
-const keyFileName = 'user-retail-webapp-firebase-adminsdk-cwz27-ead3d3e589.json';
+//const keyFileName = 'user-retail-webapp-firebase-adminsdk-cwz27-ead3d3e589.json';
 let gcs = new Storage ({
-	projectId, keyFileName
+	projectId
 });
 const os = require('os');
 const path = require('path');
@@ -56,32 +56,32 @@ const fs = require("fs");
 
 
 
-exports.onFileChange = functions.storage.object().onFinalize(event => {
-	console.log(event);
-	const bucket = event.bucket;
-	const contentType = event.contentType;
-	const filePath = event.name;
-	console.log('file detected')
+// exports.onFileChange = functions.storage.object().onFinalize(event => {
+// 	console.log(event);
+// 	const bucket = event.bucket;
+// 	const contentType = event.contentType;
+// 	const filePath = event.name;
+// 	console.log('file detected')
 
-	if(path.basename(filePath).startsWith('resized-')){
-		console.log('already resized this file')
-		return;
-	}
+// 	if(path.basename(filePath).startsWith('resized-')){
+// 		console.log('already resized this file')
+// 		return;
+// 	}
 
-	const destBucket = gcs.bucket(bucket);
-	const tmpFilePath = path.join(os.tmpdir(), path.basename(filePath));
-	const metadata = { contentType : contentType }
-	return destBucket.file(filePath).download({
-		destination : tmpFilePath
-	}).then(() => {
-        return spawn('convert', [tmpFilePath, '-resize', '500x500', tmpFilePath]);
-    }).then(() => {
-		return destBucket.upload(tmpFilePath, {
-			destination:'resized-'+ path.basename(filePath),
-			metadata: metadata
-		}) 
+// 	const destBucket = gcs.bucket(bucket);
+// 	const tmpFilePath = path.join(os.tmpdir(), path.basename(filePath));
+// 	const metadata = { contentType : contentType }
+// 	return destBucket.file(filePath).download({
+// 		destination : tmpFilePath
+// 	}).then(() => {
+//         return spawn('convert', [tmpFilePath, '-resize', '500x500', tmpFilePath]);
+//     }).then(() => {
+// 		return destBucket.upload(tmpFilePath, {
+// 			destination:'resized-'+ path.basename(filePath),
+// 			metadata: metadata
+// 		}) 
 
 
-	})
+// 	})
 
-});
+// });
