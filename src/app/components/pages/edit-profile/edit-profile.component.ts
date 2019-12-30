@@ -23,7 +23,7 @@ export class EditProfileComponent implements OnInit {
 		this.auth.eventAuthError$.subscribe(data => {
 			this.authError = data;
 		});
-		 this.uid = this.afAuth.auth.currentUser.uid;	
+		this.uid = this.afAuth.auth.currentUser.uid;	
 		this.profileSrc = this.storage.ref("profiles/" + this.uid + "/profile-photo")
         .getDownloadURL();
 	}
@@ -41,6 +41,7 @@ export class EditProfileComponent implements OnInit {
 		//this.storageRef = this.storage.ref(filePath);
 		//let profilePhoto = this.storageRef.child("profile-photo");
 		const task = this.storage.upload(filePath, this.selectedFile);
+		//this.profileSrc = this.storage.ref(filePath).getDownloadURL();
 		window.alert("Successful Upload!");
 	}
 

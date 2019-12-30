@@ -1,0 +1,54 @@
+<app-header></app-header>
+<router-outlet></router-outlet>
+<div class="container">
+	<h2>Create Your Post</h2>
+</div>
+<hr>
+<div class="container">
+	<h4>Upload at Most 4 Images</h4><br>
+	<label>Select Main</label><br>
+	<img class="resized" [src]="this.example1 | async">
+	<input style="display: none" type="file" accept="image/*" (change)="onSelectedFile1($event)" #fileInput1><br>
+	<br>
+	<button type="button" class="btn btn-primary btn-dark" (click)="fileInput1.click()">Choose Main Image</button>
+	<hr>
+	<label>Select Extra</label><br>
+	<img class="resized" [src]="this.example2 | async">
+	<input style="display: none" type="file" accept="image/*" (change)="onSelectedFile2($event)" #fileInput2><br>
+	<br>
+	<button type="button" class="btn btn-primary btn-dark" (click)="fileInput2.click()">Choose Image 1</button>
+	<hr>
+	<label>Select Extra</label><br>
+	<img class="resized" [src]="this.example3 | async">
+	<input style="display: none" type="file" accept="image/*" (change)="onSelectedFile3($event)" #fileInput3><br>
+	<br>
+	<button type="button" class="btn btn-primary btn-dark" (click)="fileInput3.click()">Choose Image 2</button>
+	<hr>
+	<label>Select Extra</label><br>
+	<img class="resized" [src]="this.example4 | async">
+	<input style="display: none" type="file" accept="image/*" (change)="onSelectedFile4($event)" #fileInput4><br>
+	<br>
+	<button type="button" class="btn btn-primary btn-dark" (click)="fileInput4.click()">Choose Image 3</button>
+	<hr>
+	<form #userRegForm="ngForm" (ngSubmit)="uploadPost(userRegForm, user.posts)" *ngIf="auth.user | async as user">
+		<div class="row">
+			<div class="col-md-12 mb-2">
+				<label for="name">Product Name</label>
+				<input ngModel #name="ngModel" name="name" type="text" class="form-control" placeholder="Logo Zip Sweater">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 mb-2">
+				<label for="price">Price(No Symbols Necessary)</label>
+				<input ngModel #price="ngModel" name="price" type="number" min="0.00" max="10000.00" step="0.01" class="form-control" placeholder="18.00">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 mb-2">
+				<label for="description">Description(Include Size If Clothing)</label>
+				<input ngModel #description="ngModel" name="description" type="text" class="form-control" placeholder="This is a sweater available in small, medium, and large">
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary btn-dark">Create Post</button><br>
+	</form>
+</div>

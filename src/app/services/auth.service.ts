@@ -18,6 +18,7 @@ interface User {
 	displayName?: string;
 	favoriteColor?: string;
 	bio?: string;
+	posts?: number;
 }
 
 
@@ -79,6 +80,7 @@ export class AuthService {
 			email: (user.email === "") ? prev.email : user.email,
 			uid: curr.uid,
 			bio: (user.bio === "") ? prev.bio : user.bio,
+			posts: prev.posts
 		}).then(() => {
 			this.router.navigate(['/account']);
 		})
@@ -105,6 +107,7 @@ export class AuthService {
 			uid: userCredential.user.uid,
 			bio: "this is the default bio",
 			photoURL: "https://i.stack.imgur.com/dr5qp.jpg",
+			posts: 0,
 		});
 	}
 
@@ -152,7 +155,8 @@ export class AuthService {
 			email: user.email,
 			displayName: user.displayName,
 			photoURL: user.photoURL,
-			bio: "this is the default bio"
+			bio: "this is the default bio",
+			posts: 0
 		}
 
 		return userRef.set(data, { merge: true })

@@ -10,13 +10,13 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 Install Firebase and Angular Firebase from the node.js terminal.
 
-Run `npm install @angular/fire firebase --savenpm install`
+Run `npm install @angular/fire firebase --save`
 
-## Imgur
+## Google Cloud Common
 
-Install Imgur from the node.js terminal
+Install Google Cloud Common from the node.js terminal
 
-Run `npm i ng-imgur`
+Run `npm i @google-cloud/common`
 
 ## Code scaffolding
 

@@ -22,6 +22,7 @@ import { AccountComponent } from './components/pages/account/account.component';
 import { RegistrationComponent } from './components/pages/registration/registration.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { EditProfileComponent } from './components/pages/edit-profile/edit-profile.component';
+import { CreatePostComponent } from './components/pages/create-post/create-post.component';
 
 const firebaseConfig = {
     apiKey: "AIzaSyD8pPJNfaDDJdlkgN13onJlECW7uW9E610",
@@ -45,7 +46,8 @@ const firebaseConfig = {
     AccountComponent,
     RegistrationComponent,
     LoginComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,
