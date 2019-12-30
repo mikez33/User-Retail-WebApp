@@ -36,10 +36,11 @@
 				<div class="col-md-12 mb-2">
 				<!-- <label>Upload a Photo</label>
 					<input ngModel #photoURL="ngModel" name="photoURL" type="photoURL" class="form-control"> -->
-					<label>Select Image</label><br>
-					<input type="file" accept="image/*" (change)="onFileSelected($event)" #fileInput>
-					<button type="button" class="btn btn-primary btn-dark" (click)="fileInput.click()">Pick File</button>
-					<button type="button" class="btn btn-primary btn-dark" (click)="uploadProfile(user.uid)">Upload</button>
+					<input style="display: none" type="file" accept="image/*" (change)="onFileSelected($event)" #fileInput><br>
+					<label>Select Profile Image</label><br>
+					<img id="profile" class="rounded-circle account-img" [src]="this.profileSrc | async"><br>
+					<button type="button" class="btn btn-primary btn-dark" (click)="fileInput.click()">Choose File</button>
+					<button type="button" style="margin: 5px" class="btn btn-primary btn-dark" (click)="uploadProfile(user.uid)">Upload</button>
 				</div>
 			</div>
 			<div>

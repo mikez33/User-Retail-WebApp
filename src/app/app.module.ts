@@ -59,7 +59,7 @@ const firebaseConfig = {
     AngularFireStorageModule, // storage  
     AngularFireDatabaseModule
   ],
-  providers: [AngularFireDatabase, AngularFireStorage],
+  providers: [AngularFireDatabase, AngularFireStorage, EditProfileComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

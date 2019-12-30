@@ -3,12 +3,40 @@
 <div class="content-section" *ngIf="auth.user | async as user">
 	<div class="container">
 		<div class="media">
-			<img class="rounded-circle account-img" src="getImageURL(user.uid)">		
+			<img id="profile" class="rounded-circle account-img" [src]="this.profileSrc | async">
 		</div>
 		<div class="media-body">
 			<h4 class="text-secondary">{{ user.displayName }}</h4>
 			<p class="text-secondary">{{ user?.bio }}</p>
 			<button type="button" class="btn btn-primary btn-large btn-dark" (click)="editProfile()">Edit Profile</button>
 		</div>
-	</div>
+	</div><br>
+	<div class="container"> 
+		<div class="row">
+			<div class="col">
+				<img src="https://source.unsplash.com/random/399x299" width="100%">
+				insert statement
+			</div>
+			<div class="col">
+				<img src="https://source.unsplash.com/random/400x300" width="100%">
+				insert statement
+			</div>
+			<div class="col">
+				<img src="https://source.unsplash.com/random/401x301" width="100%">
+				insert statement
+			</div>
+			<div class="col-md-4">
+				<div class="content-section">
+					<h3>More Information</h3>
+					<p class='text-muted'>Check below for the latest features and pricings
+						<ul class="list-group">
+							<li class="list-group-item list-group-item-light">Latest Updates</li>
+							<li class="list-group-item list-group-item-light">Announcements</li>
+							<li class="list-group-item list-group-item-light">Products</li>
+							<a routlink="/" class="list-group-item list-group-item-light">Create Profile</a>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 </div>

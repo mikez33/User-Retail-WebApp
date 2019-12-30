@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 // import { Imgur } from'../../../../../node_modules/ng-imgur';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireDatabase, AngularFireList, AngularFireDatabaseModule } from '@angular/fire/database';
 
@@ -12,18 +13,19 @@ import { AngularFireDatabase, AngularFireList, AngularFireDatabaseModule } from 
 })
 export class EditProfileComponent implements OnInit {
 	selectedFile: File = null;
-	url
-	storageRef;
-	user;
-	firstName;
+	uid;
 	authError: any;
+	profileSrc;
 	constructor(public auth: AuthService, 
 				private storage: AngularFireStorage, 
-				private http: HttpClientModule) { 
+				private http: HttpClientModule,
+				private afAuth: AngularFireAuth) { 
 		this.auth.eventAuthError$.subscribe(data => {
 			this.authError = data;
 		});
-		this.user = auth.user;	
+		 this.uid = this.afAuth.auth.currentUser.uid;	
+		this.profileSrc = this.storage.ref("profiles/" + this.uid + "/profile-photo")
+        .getDownloadURL();
 	}
 
 	ngOnInit() {
@@ -34,9 +36,12 @@ export class EditProfileComponent implements OnInit {
 	}
 
 	uploadProfile(uid: string) {
-		this.storageRef = this.storage.ref("profile: " + uid);
-		let profilePhoto = this.storageRef.child("profile-photo");
-		profilePhoto.put(this.selectedFile);
+		const filePath = "profiles/" + uid + "/profile-photo";
+		this.uid = uid;
+		//this.storageRef = this.storage.ref(filePath);
+		//let profilePhoto = this.storageRef.child("profile-photo");
+		const task = this.storage.upload(filePath, this.selectedFile);
+		window.alert("Successful Upload!");
 	}
 
 	updateUser(frm, user) {
