@@ -60,16 +60,24 @@ export class CreatePostComponent implements OnInit {
 		this.selectedFile4 = <File>event.target.files[0];
 	}
 
-	uploadPost(frm, posts) {
+	uploadPost(frm, posts, user) {
 		if (this.selectedFile1 == null) {
 			window.alert("Must Upload Main Image");
 		} else {
+			const profilePath = "profiles/" + this.uid + "/profile-photo";
+			this.storage.ref(profilePath).updateMetadata({customMetadata: {posts: posts + 1}});
 			this.count += 1;
 			const name = frm.value.name;
 			const price = frm.value.price;
 			const description = frm.value.description;
 			let strPosts = (posts + 1).toString();
 			this.afs.doc(`users/${this.uid}`).set({
+				firstName: user.firstName,
+				lastName: user.lastName,
+				displayName: user.firstName + ' ' + user.lastName,
+				email: user.email,
+				uid: this.uid,
+				bio: user.bio,
 				posts: posts + 1,
 			});
 			const initPath = "profiles/" + this.uid + "/posts/post" + strPosts + "/";

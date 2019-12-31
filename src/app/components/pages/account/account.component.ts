@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Inject }  from '@angular/core';
+import { DOCUMENT } from '@angular/common'; 
+import {AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 
 import { AuthService } from '../../../services/auth.service';
 import { auth } from 'firebase/app';
@@ -10,16 +13,24 @@ import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/stor
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 // import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 
+import { Observable, of, BehaviorSubject } from 'rxjs';
+import { switchMap, map, finalize, takeUntil} from 'rxjs/operators';
+
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css'],
 })
+
 export class AccountComponent implements OnInit {
+  postList = [];
   profileSrc;
   photoURL;
   uid;
   storageRef;
+  postURL;
+  posts;
+  user;
   constructor(
   	public auth: AuthService, 
     private afAuth: AngularFireAuth,
@@ -34,13 +45,42 @@ export class AccountComponent implements OnInit {
     //   this.photoURL = snapshot.val().photoURL;
     // })
     this.uid = this.afAuth.auth.currentUser.uid;
-    // console.log(this.uid);
+  }
+
+  ngOnInit() {
+    this.auth.user.subscribe(user => {
+      this.user = user;
+      this.posts = this.user.posts;
+      let index= 0;
+      for (let i = this.posts; i >= 1; i--) {
+        const path = "profiles/" + this.uid + "/posts/post"
+        this.postURL = this.storage.ref(path + i.toString() + "/1").getDownloadURL();
+        this.postList[index] = this.postURL;
+        index++;
+      }
+    })
     this.profileSrc = this.storage.ref("profiles/" + this.uid + "/profile-photo")
         .getDownloadURL();
   }
 
-  ngOnInit() {
+  async setPosts() {
+    await this.auth.user.subscribe(user => {
+      return user.posts;
+    })
+  }
 
+  async getPosts() {
+    let promise = this.auth.user.subscribe(user => {
+      (user.posts);
+    });
+
+    this.posts = await promise;
+  }
+
+  async getUser(user) {
+    await user.subscribe(user => {
+      return user
+    });
   }
 
   getId() {

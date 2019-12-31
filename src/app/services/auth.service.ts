@@ -21,10 +21,8 @@ interface User {
 	posts?: number;
 }
 
-
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-
 	user: Observable<User>;
 	newUser: User;
 	private eventAuthError = new BehaviorSubject<string>("");
@@ -147,7 +145,6 @@ export class AuthService {
 
 		const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
 		let names = user.displayName.split(" ");
-
 		const data: User = {
 			firstName: names[0],
 			lastName: names[1],

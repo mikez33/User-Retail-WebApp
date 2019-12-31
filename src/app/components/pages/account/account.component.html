@@ -13,32 +13,9 @@
 		</div>
 	</div><br>
 	<hr>
-	<div class="container"> 
-		<div class="row">
-			<div class="col">
-				<img src="https://source.unsplash.com/random/399x299" width="100%">
-				insert statement
-			</div>
-			<div class="col">
-				<img src="https://source.unsplash.com/random/400x300" width="100%">
-				insert statement
-			</div>
-			<div class="col">
-				<img src="https://source.unsplash.com/random/401x301" width="100%">
-				insert statement
-			</div>
-			<div class="col-md-4">
-				<div class="content-section">
-					<h3>More Information</h3>
-					<p class='text-muted'>Check below for the latest features and pricings
-						<ul class="list-group">
-							<li class="list-group-item list-group-item-light">Latest Updates</li>
-							<li class="list-group-item list-group-item-light">Announcements</li>
-							<li class="list-group-item list-group-item-light">Products</li>
-							<a routlink="/" class="list-group-item list-group-item-light">Create Profile</a>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
 </div>
+<div class="column" *ngFor="let post of postList">
+	<img class="resized" [src]="post | async"> 
+</div>
+	
+

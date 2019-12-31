@@ -30,7 +30,7 @@
 	<br>
 	<button type="button" class="btn btn-primary btn-dark" (click)="fileInput4.click()">Choose Image 3</button>
 	<hr>
-	<form #userRegForm="ngForm" (ngSubmit)="uploadPost(userRegForm, user.posts)" *ngIf="auth.user | async as user">
+	<form #userRegForm="ngForm" (ngSubmit)="uploadPost(userRegForm, user.posts, user)" *ngIf="auth.user | async as user">
 		<div class="row">
 			<div class="col-md-12 mb-2">
 				<label for="name">Product Name</label>

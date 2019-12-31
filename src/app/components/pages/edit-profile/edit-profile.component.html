@@ -40,7 +40,7 @@
 					<label>Select Profile Image</label><br>
 					<img id="profile" class="rounded-circle account-img" [src]="this.profileSrc | async"><br>
 					<button type="button" class="btn btn-primary btn-dark" (click)="fileInput.click()">Choose File</button>
-					<button type="button" style="margin: 5px" class="btn btn-primary btn-dark" (click)="uploadProfile(user.uid)">Upload</button>
+					<button type="button" style="margin: 5px" class="btn btn-primary btn-dark" (click)="uploadProfile(user.uid, user.posts)">Upload</button>
 				</div>
 			</div>
 			<div>

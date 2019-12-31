@@ -9,6 +9,47 @@ h1, h2, h3, h4, h5, h6 {
   color: #444444;
 }
 
+.horizontal {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap:wrap;
+}
+
+#thumbs {   
+    width: 540px;
+    margin-top:90px;
+    margin-left: auto; 
+    margin-right: auto;
+
+     text-align: justify;
+    -ms-text-justify: distribute-all-lines;
+    text-justify: distribute-all-lines;
+}
+#thumbs a {
+    vertical-align: top;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+}
+.stretch {
+    width: 100%;
+    display: inline-block;
+    font-size: 0;
+    line-height: 0
+}
+
+.resized {
+  height: 90%;
+  width: 90%;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+  margin-bottom: 15px;
+}
+
 .bg-steel {
   background-color: #000000;
   color: #000000;

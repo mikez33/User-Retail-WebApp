@@ -35,12 +35,13 @@ export class EditProfileComponent implements OnInit {
 		this.selectedFile = <File>event.target.files[0];
 	}
 
-	uploadProfile(uid: string) {
+	uploadProfile(uid: string, posts) {
 		const filePath = "profiles/" + uid + "/profile-photo";
 		this.uid = uid;
 		//this.storageRef = this.storage.ref(filePath);
 		//let profilePhoto = this.storageRef.child("profile-photo");
-		const task = this.storage.upload(filePath, this.selectedFile);
+		const ref = this.storage.ref(filePath);
+		const task = ref.put(this.selectedFile, {customMetadata :{posts: posts}});
 		//this.profileSrc = this.storage.ref(filePath).getDownloadURL();
 		window.alert("Successful Upload!");
 	}
