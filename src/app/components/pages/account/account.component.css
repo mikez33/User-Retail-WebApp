@@ -43,11 +43,21 @@ h1, h2, h3, h4, h5, h6 {
   width: 90%;
 }
 
+.resized:hover {
+  background-color: white;
+  /*color: white;*/
+}
+
 .column {
   float: left;
   width: 33.33%;
   padding: 5px;
   margin-bottom: 15px;
+}
+
+.column:hover {
+  background-color: white;
+  /*color: white;*/
 }
 
 .bg-steel {
