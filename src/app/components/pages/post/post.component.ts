@@ -40,8 +40,9 @@ export class PostComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this.uid = this.afAuth.auth.currentUser.uid;
 		this.postID = this.route.snapshot.paramMap.get('id');
+		this.uid = this.postID.split('-')[0];
+		this.postID = this.postID.split('-')[1];
 		this.postReference = this.afs.doc(`posts/${this.uid}/posts/${this.postID}`);
 		this.postReference.valueChanges().subscribe(post => {
 			this.productName = post.productName;

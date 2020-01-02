@@ -22,7 +22,7 @@ const routes: Routes = [
 	{path: 'secret', component: SuperSecretComponent, canActivate: [AuthGuard]},
 	{path: 'edit_profile', component: EditProfileComponent, canActivate: [AuthGuard]},
 	{path: 'create_post', component: CreatePostComponent, canActivate: [AuthGuard]},
-	{path: 'post/:id', component: PostComponent, canActivate: [AuthGuard]}
+	{path: 'post/:id', component: PostComponent}
 ];
 
 @NgModule({

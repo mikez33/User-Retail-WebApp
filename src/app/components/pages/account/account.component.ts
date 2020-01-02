@@ -69,8 +69,8 @@ export class AccountComponent implements OnInit {
         .getDownloadURL();
   }
 
-  goTo(posts) {
-    this.router.navigate(['/post/' + posts]);
+  goTo(posts, uid) {
+    this.router.navigate(['/post/' + this.uid + '-' + posts]);
   }
 
   async setPosts() {
