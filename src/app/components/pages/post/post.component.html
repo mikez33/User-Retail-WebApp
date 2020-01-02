@@ -1,0 +1,19 @@
+<div class="container">
+	<div class="row">
+		<div class="column">
+			<img class="mainSize" [src]="mainURL | async">
+		</div>
+		<div class="column">
+			<h1>{{ productName }}</h1>
+			<p>Price: ${{ price }}</p>
+			<h5>Description: </h5>
+			<h6>{{ description }}</h6>
+			<button class="btn btn-primary btn-dark">Add to bag</button>
+		</div>
+	</div>
+	<div *ngFor="let url of postList">
+		<div class="small-column">
+			<img class="resized" [src]="url | async"> 
+		</div>
+	</div>
+</div>

@@ -55,7 +55,6 @@ const fs = require("fs");
 // });
 
 
-
 // exports.onFileChange = functions.storage.object().onFinalize(event => {
 // 	console.log(event);
 // 	const bucket = event.bucket;

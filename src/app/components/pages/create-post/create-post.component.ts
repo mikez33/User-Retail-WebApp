@@ -82,11 +82,7 @@ export class CreatePostComponent implements OnInit {
 			});
 			const initPath = "profiles/" + this.uid + "/posts/post" + strPosts + "/";
 			let ref = this.storage.ref(initPath + (this.count).toString());
-			ref.put(this.selectedFile1, { customMetadata: { 
-				productName: name,
-				price: price,
-				description: description
-			} });
+			ref.put(this.selectedFile1);
 			if (this.selectedFile2 !== null) {
 				this.count += 1;
 				ref = this.storage.ref(initPath + (this.count).toString());
@@ -102,6 +98,13 @@ export class CreatePostComponent implements OnInit {
 				ref = this.storage.ref(initPath + (this.count).toString());
 				ref.put(this.selectedFile4);
 			}
+			this.afs.doc(`posts/${this.uid}/posts/${posts + 1}`).set({
+				productName: name,
+				price: price,
+				description: description,
+				photos: this.count,
+				likes: 0
+			});
 			this.router.navigate(['/account']);
 			window.alert("Successful Post!");
 

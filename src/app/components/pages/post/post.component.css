@@ -1,0 +1,35 @@
+.column {
+	float: left;
+	width: 40%;
+	padding: 5px;
+	margin-bottom: 15px;
+}
+
+.small-column {
+	float: left;
+	width: 33%;
+	padding: 5px;
+	margin-bottom: 15px;
+}
+
+.left {
+	width: 50%;
+}
+
+.right {
+	position: absolute;
+	right: 0px;
+	width: 300px;
+	border: 3px;
+	padding: 10px;
+}
+
+.mainSize {
+	height: 100%;
+	width: 80%;
+}
+
+.resized {
+	height: 90%;
+	width: 90%;
+}

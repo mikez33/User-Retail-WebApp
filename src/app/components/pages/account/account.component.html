@@ -15,7 +15,7 @@
 	<hr>
 </div>
 <div class="column" *ngFor="let post of postList">
-	<img class="resized" [src]="post | async"> 
+	<img class="resized" [src]="post.url | async" (click)="this.goTo(post.id)">
 </div>
 	
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
-import {AfterViewInit, ElementRef, ViewChild} from '@angular/core';
+import { AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 
 import { AuthService } from '../../../services/auth.service';
 import { auth } from 'firebase/app';
@@ -15,6 +15,8 @@ import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { switchMap, map, finalize, takeUntil} from 'rxjs/operators';
+import { PostComponent } from '../../../components/pages/post/post.component';
+import { AuthGuard } from '../../../services/auth.guard';
 
 @Component({
   selector: 'app-account',
@@ -23,6 +25,7 @@ import { switchMap, map, finalize, takeUntil} from 'rxjs/operators';
 })
 
 export class AccountComponent implements OnInit {
+  postNums = [];
   postList = [];
   profileSrc;
   photoURL;
@@ -55,12 +58,19 @@ export class AccountComponent implements OnInit {
       for (let i = this.posts; i >= 1; i--) {
         const path = "profiles/" + this.uid + "/posts/post"
         this.postURL = this.storage.ref(path + i.toString() + "/1").getDownloadURL();
-        this.postList[index] = this.postURL;
+        this.postList[index] = {
+          url: this.postURL,
+          id: i,
+        }
         index++;
       }
     })
     this.profileSrc = this.storage.ref("profiles/" + this.uid + "/profile-photo")
         .getDownloadURL();
+  }
+
+  goTo(posts) {
+    this.router.navigate(['/post/' + posts]);
   }
 
   async setPosts() {
