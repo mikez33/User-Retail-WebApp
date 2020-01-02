@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 import { AfterViewInit, ElementRef, ViewChild} from '@angular/core';
@@ -34,10 +34,12 @@ export class AccountComponent implements OnInit {
   postURL;
   posts;
   user;
+  accountID;
   constructor(
   	public auth: AuthService, 
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
+    private route: ActivatedRoute,
     public router: Router,
     public storage: AngularFireStorage,
     public profile: EditProfileComponent
@@ -47,10 +49,11 @@ export class AccountComponent implements OnInit {
     // this.db.database.ref().child("Users").on("value", (snapshot) => {
     //   this.photoURL = snapshot.val().photoURL;
     // })
-    this.uid = this.afAuth.auth.currentUser.uid;
+    //this.uid = this.afAuth.auth.currentUser.uid;
   }
 
   ngOnInit() {
+    this.uid = this.afAuth.auth.currentUser.uid;
     this.auth.user.subscribe(user => {
       this.user = user;
       this.posts = this.user.posts;

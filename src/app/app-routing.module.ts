@@ -10,6 +10,7 @@ import { RegistrationComponent } from './components/pages/registration/registrat
 import { EditProfileComponent } from './components/pages/edit-profile/edit-profile.component';
 import { CreatePostComponent } from './components/pages/create-post/create-post.component';
 import { PostComponent } from './components/pages/post/post.component';
+import { ViewProfileComponent } from './components/pages/view-profile/view-profile.component';
 
 
 const routes: Routes = [
@@ -17,12 +18,13 @@ const routes: Routes = [
 	{path: 'home', component: HomeComponent},
 	{path: 'about', component: AboutComponent},
 	{path: 'account', component: AccountComponent, canActivate: [AuthGuard]},
+	{path: 'account/:id', component: ViewProfileComponent},
 	{path: 'login', component: LoginComponent},
 	{path: 'register', component: RegistrationComponent},
 	{path: 'secret', component: SuperSecretComponent, canActivate: [AuthGuard]},
 	{path: 'edit_profile', component: EditProfileComponent, canActivate: [AuthGuard]},
 	{path: 'create_post', component: CreatePostComponent, canActivate: [AuthGuard]},
-	{path: 'post/:id', component: PostComponent}
+	{path: 'post/:id', component: PostComponent},
 ];
 
 @NgModule({
