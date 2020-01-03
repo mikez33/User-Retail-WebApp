@@ -59,55 +59,37 @@ export class AccountComponent implements OnInit {
       this.posts = this.user.posts;
       let index= 0;
       for (let i = this.posts; i >= 1; i--) {
-        const path = "profiles/" + this.uid + "/posts/post"
-        this.postURL = this.storage.ref(path + i.toString() + "/1").getDownloadURL();
-        this.postList[index] = {
-          url: this.postURL,
-          id: i,
+        if (!this.arrayContains(user.deleted, i.toString())) {
+          const path = "profiles/" + this.uid + "/posts/post"
+          this.postURL = this.storage.ref(path + i.toString() + "/1").getDownloadURL();
+          this.postList[index] = {
+            url: this.postURL,
+            id: i,
+          }
+          index++;
         }
-        index++;
       }
     })
     this.profileSrc = this.storage.ref("profiles/" + this.uid + "/profile-photo")
         .getDownloadURL();
   }
 
+  arrayContains(arr, i) {
+    for (let index = 0; index <= arr.length; index++) {
+      if (arr[index] === i) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   goTo(posts, uid) {
     this.router.navigate(['/post/' + this.uid + '-' + posts]);
-  }
-
-  async setPosts() {
-    await this.auth.user.subscribe(user => {
-      return user.posts;
-    })
-  }
-
-  async getPosts() {
-    let promise = this.auth.user.subscribe(user => {
-      (user.posts);
-    });
-
-    this.posts = await promise;
-  }
-
-  async getUser(user) {
-    await user.subscribe(user => {
-      return user
-    });
   }
 
   getId() {
     this.auth.getUid();
   }
-
-  // getImageURL(uid) {
-  //   const filePath = "profiles/" + uid + "/profile-photo";
-  //   // this.storageRef = this.storage.ref("profile: " + uid);
-  //   // return this.storageRef.child("profile-photo").toString();
-  //   // console.log(uid);
-  //   console.log(filePath);
-  //   return this.storage.ref(filePath).getDownloadURL();
-  // }
 
   editProfile() {
     this.router.navigate(['edit_profile']);

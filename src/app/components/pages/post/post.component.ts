@@ -9,6 +9,7 @@ import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/stor
 
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { switchMap} from 'rxjs/operators';
+import * as firebase from 'firebase';
 
 @Component({
 	selector: 'app-post',
@@ -32,12 +33,17 @@ export class PostComponent implements OnInit {
 	price;
 	description;
 	likes;
+	isAuthenticated;
+	displayName;
 	constructor(private afs: AngularFirestore, 
 				private route: ActivatedRoute,
 				private auth: AuthService,
 				private afAuth: AngularFireAuth,
 				private storage: AngularFireStorage,
-	) { }
+				private router: Router,
+	) { 
+
+	}
 
 	ngOnInit() {
 		this.postID = this.route.snapshot.paramMap.get('id');
@@ -49,6 +55,7 @@ export class PostComponent implements OnInit {
 			this.price = post.price;
 			this.description = post.description;
 			this.likes = post.likes;
+			this.displayName = post.displayName;
 			const path = "profiles/" + this.uid + "/posts/post" + this.postID + "/";
 			this.mainURL = this.postURL = this.storage.ref(path + "1").getDownloadURL();
 			this.count = post.photos;
@@ -58,7 +65,46 @@ export class PostComponent implements OnInit {
 				this.postList[index] = this.postURL;
 				index++;
 			}
-		})
+		});
+		this.auth.user.subscribe(user => {
+			this.isAuthenticated = (user.uid === this.uid);
+		});
+	}
+
+	delete(user) {
+		const path = "profiles/" + this.uid + "/posts/post" + this.postID + "/";
+		this.postReference = this.afs.doc(`posts/${this.uid}/posts/${this.postID}`);
+		this.postReference.valueChanges().subscribe(post => {
+			this.count = post.photos;
+			for (let i = 1; i <= this.count; i++) {
+				this.postURL = this.storage.ref(path + i.toString()).delete();
+			}
+		});
+		let arr = user.deleted;
+		arr.push(this.postID);
+		this.afs.doc(`users/${this.uid}`).set({
+			firstName: user.firstName,
+			lastName: user.lastName,
+			displayName: user.displayName,
+			email: user.email,
+			uid: user.uid,
+			bio: user.bio,
+			posts: user.posts,
+			deleted: arr,
+		});
+		window.alert("Post Successfully Deleted");
+		this.router.navigate(['/account']);
+	}
+
+	newArray(old, val) {
+		let arr = [];
+		for (let i = 0; i < old.length + 1; i++) {
+			if (i === old.length) {
+				arr[i] = val;
+			} else {
+				arr[i] = old[i];
+			}
+		}
 	}
 
 }

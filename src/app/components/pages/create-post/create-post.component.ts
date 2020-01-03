@@ -79,6 +79,7 @@ export class CreatePostComponent implements OnInit {
 				uid: this.uid,
 				bio: user.bio,
 				posts: posts + 1,
+				deleted: user.deleted,
 			});
 			const initPath = "profiles/" + this.uid + "/posts/post" + strPosts + "/";
 			let ref = this.storage.ref(initPath + (this.count).toString());
@@ -103,7 +104,8 @@ export class CreatePostComponent implements OnInit {
 				price: price,
 				description: description,
 				photos: this.count,
-				likes: 0
+				likes: 0, 
+				user: user.displayName,
 			});
 			this.router.navigate(['/account']);
 			window.alert("Successful Post!");
