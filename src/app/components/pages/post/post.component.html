@@ -5,6 +5,7 @@
 		</div>
 		<div class="column">
 			<h1>{{ productName }}</h1>
+			<p type="button" (click)="goToAccount()">Sold by: {{ displayName }}</p>
 			<p>Price: ${{ price }}</p>
 			<h5>Description: </h5>
 			<h6>{{ description }}</h6>

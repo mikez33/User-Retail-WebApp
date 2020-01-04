@@ -11,12 +11,24 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 import { switchMap} from 'rxjs/operators';
 import * as firebase from 'firebase';
 
+interface User {
+	firstName: string;
+	lastName: string;
+	uid: string;
+	email: string;
+	photoURL?: string;
+	displayName?: string;
+	favoriteColor?: string;
+	bio?: string;
+	posts?: number;
+	deleted?: [];
+}
+
 @Component({
 	selector: 'app-post',
 	templateUrl: './post.component.html',
 	styleUrls: ['./post.component.css']
 })
-
 
 export class PostComponent implements OnInit {
 	userPost;
@@ -35,6 +47,7 @@ export class PostComponent implements OnInit {
 	likes;
 	isAuthenticated;
 	displayName;
+	accountLink;
 	constructor(private afs: AngularFirestore, 
 				private route: ActivatedRoute,
 				private auth: AuthService,
@@ -48,7 +61,11 @@ export class PostComponent implements OnInit {
 	ngOnInit() {
 		this.postID = this.route.snapshot.paramMap.get('id');
 		this.uid = this.postID.split('-')[0];
+		this.accountLink = "/account/" + this.uid;
 		this.postID = this.postID.split('-')[1];
+		this.afs.doc<User>(`users/${this.uid}`).valueChanges().subscribe(user => {
+			this.displayName = user.displayName;
+		})
 		this.postReference = this.afs.doc(`posts/${this.uid}/posts/${this.postID}`);
 		this.postReference.valueChanges().subscribe(post => {
 			this.productName = post.productName;
@@ -96,15 +113,8 @@ export class PostComponent implements OnInit {
 		this.router.navigate(['/account']);
 	}
 
-	newArray(old, val) {
-		let arr = [];
-		for (let i = 0; i < old.length + 1; i++) {
-			if (i === old.length) {
-				arr[i] = val;
-			} else {
-				arr[i] = old[i];
-			}
-		}
+	goToAccount() {
+		this.router.navigate(['/account/' + this.uid]);
 	}
 
 }

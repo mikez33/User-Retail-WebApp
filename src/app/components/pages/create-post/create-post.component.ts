@@ -106,6 +106,7 @@ export class CreatePostComponent implements OnInit {
 				photos: this.count,
 				likes: 0, 
 				user: user.displayName,
+				uid: this.uid,
 			});
 			this.router.navigate(['/account']);
 			window.alert("Successful Post!");

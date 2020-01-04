@@ -16,6 +16,19 @@ import { switchMap, map, finalize, takeUntil} from 'rxjs/operators';
 import { PostComponent } from '../../../components/pages/post/post.component';
 import { AuthGuard } from '../../../services/auth.guard';
 
+interface User {
+	firstName: string;
+	lastName: string;
+	uid: string;
+	email: string;
+	photoURL?: string;
+	displayName?: string;
+	favoriteColor?: string;
+	bio?: string;
+	posts?: number;
+	deleted?: [];
+}
+
 @Component({
 	selector: 'app-view-profile',
 	templateUrl: './view-profile.component.html',
@@ -52,24 +65,35 @@ export class ViewProfileComponent implements OnInit {
 
 		ngOnInit() {
 			this.uid = this.route.snapshot.paramMap.get('id');
-			this.afs.doc(`users/${this.uid}`).valueChanges().subscribe(user => {
+			this.afs.doc<User>(`users/${this.uid}`).valueChanges().subscribe(user => {
 				this.user = user;
 				this.displayName = this.user.displayName;
 				this.bio = this.user.bio;
 				this.posts = this.user.posts;
 				let index= 0;
 				for (let i = this.posts; i >= 1; i--) {
-					const path = "profiles/" + this.uid + "/posts/post"
-					this.postURL = this.storage.ref(path + i.toString() + "/1").getDownloadURL();
-					this.postList[index] = {
-						url: this.postURL,
-						id: i,
+					if (!this.arrayContains(user.deleted, i.toString())) {
+						const path = "profiles/" + this.uid + "/posts/post"
+						this.postURL = this.storage.ref(path + i.toString() + "/1").getDownloadURL();
+						this.postList[index] = {
+							url: this.postURL,
+							id: i,
+						}
+						index++;
 					}
-					index++;
 				}
 			})
 			this.profileSrc = this.storage.ref("profiles/" + this.uid + "/profile-photo")
 			.getDownloadURL();
+		}
+
+		arrayContains(arr, i) {
+			for (let index = 0; index <= arr.length; index++) {
+				if (arr[index] === i) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		goTo(posts, uid) {
