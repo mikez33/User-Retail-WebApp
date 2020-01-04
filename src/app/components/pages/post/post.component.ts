@@ -55,7 +55,9 @@ export class PostComponent implements OnInit {
 				private storage: AngularFireStorage,
 				private router: Router,
 	) { 
-
+		this.afs.doc<User>(`users/${this.uid}`).valueChanges().subscribe(user => {
+			this.displayName = user.displayName;
+		});
 	}
 
 	ngOnInit() {
@@ -63,11 +65,11 @@ export class PostComponent implements OnInit {
 		this.uid = this.postID.split('-')[0];
 		this.accountLink = "/account/" + this.uid;
 		this.postID = this.postID.split('-')[1];
-		this.afs.doc<User>(`users/${this.uid}`).valueChanges().subscribe(user => {
-			this.displayName = user.displayName;
-		})
 		this.postReference = this.afs.doc(`posts/${this.uid}/posts/${this.postID}`);
 		this.postReference.valueChanges().subscribe(post => {
+			this.afs.doc<User>(`users/${this.uid}`).valueChanges().subscribe(user => {
+				this.displayName = user.displayName;
+			});
 			this.productName = post.productName;
 			this.price = post.price;
 			this.description = post.description;
@@ -76,7 +78,7 @@ export class PostComponent implements OnInit {
 			const path = "profiles/" + this.uid + "/posts/post" + this.postID + "/";
 			this.mainURL = this.postURL = this.storage.ref(path + "1").getDownloadURL();
 			this.count = post.photos;
-			let index= 0;
+			let index = 0;
 			for (let i = 2; i <= this.count; i++) {
 				this.postURL = this.storage.ref(path + i.toString()).getDownloadURL();
 				this.postList[index] = this.postURL;

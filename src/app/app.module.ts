@@ -25,6 +25,7 @@ import { EditProfileComponent } from './components/pages/edit-profile/edit-profi
 import { CreatePostComponent } from './components/pages/create-post/create-post.component';
 import { PostComponent } from './components/pages/post/post.component';
 import { ViewProfileComponent } from './components/pages/view-profile/view-profile.component';
+import { FooterComponent } from './components/layout/footer/footer.component';
 
 const firebaseConfig = {
     apiKey: "AIzaSyD8pPJNfaDDJdlkgN13onJlECW7uW9E610",
@@ -51,7 +52,8 @@ const firebaseConfig = {
     EditProfileComponent,
     CreatePostComponent,
     PostComponent,
-    ViewProfileComponent
+    ViewProfileComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

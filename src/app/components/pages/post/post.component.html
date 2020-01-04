@@ -5,7 +5,7 @@
 		</div>
 		<div class="column">
 			<h1>{{ productName }}</h1>
-			<p type="button" (click)="goToAccount()">Sold by: {{ displayName }}</p>
+			<p type="button" (click)="goToAccount()">Sold by: {{ this.displayName }}</p>
 			<p>Price: ${{ price }}</p>
 			<h5>Description: </h5>
 			<h6>{{ description }}</h6>
@@ -15,9 +15,11 @@
 			</div>
 		</div>
 	</div>
-	<div *ngFor="let url of postList">
-		<div class="small-column">
-			<img class="resized" [src]="url | async"> 
+	<div class="row">
+		<div *ngFor="let url of postList">
+			<div class="small-column">
+				<img class="resized" [src]="url | async"> 
+			</div>
 		</div>
 	</div>
 </div>
