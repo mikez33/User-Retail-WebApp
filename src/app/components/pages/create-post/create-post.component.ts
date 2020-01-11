@@ -80,6 +80,8 @@ export class CreatePostComponent implements OnInit {
 				bio: user.bio,
 				posts: posts + 1,
 				deleted: user.deleted,
+				followers: user.followers,
+				following: user.following,
 			});
 			const initPath = "profiles/" + this.uid + "/posts/post" + strPosts + "/";
 			let ref = this.storage.ref(initPath + (this.count).toString());

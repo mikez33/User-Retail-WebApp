@@ -8,8 +8,13 @@
 		<div class="media-body">
 			<h4 class="text-secondary">{{ user.displayName }}</h4>
 			<p class="text-secondary">{{ user?.bio }}</p>
+			<h5 class="text-secondary" style="float: left; padding-right: 10px">Followers: {{ this.followers }}</h5>
+			<h5 class="text-secondary" style="float: left">Following: {{ this.following }}</h5>
+			<br>
+			<hr>
 			<button type="button" class="btn btn-primary btn-large btn-dark" (click)="editProfile()">Edit Profile</button>
 			<button type="button" class="btn btn-primary btn-large btn-dark" style="margin-left: 10px;" routerLink="/create_post">Create Post</button>
+			
 		</div>
 	</div><br>
 	<hr>

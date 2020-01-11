@@ -27,6 +27,8 @@ interface User {
 	bio?: string;
 	posts?: number;
 	deleted?: [];
+	followers?: string[];
+	following?: string[];
 }
 
 @Component({
@@ -46,7 +48,16 @@ export class ViewProfileComponent implements OnInit {
 	user;
 	accountID;
 	displayName;
+	firstName;
+	lastName;
+	email;
+	followersArr;
+	followingArr;
+	deleted;
 	bio;
+	followers;
+	following;
+	isFollowing;
 	constructor(
 		public auth: AuthService, 
 		private afAuth: AngularFireAuth,
@@ -70,6 +81,17 @@ export class ViewProfileComponent implements OnInit {
 				this.displayName = this.user.displayName;
 				this.bio = this.user.bio;
 				this.posts = this.user.posts;
+				this.followers = this.user.followers.length;
+      			this.following = this.user.following.length;
+      			this.firstName = this.user.firstName;
+				this.lastName = user.lastName;
+				this.bio = user.bio;
+				this.email = user.email;
+				this.posts = user.posts;
+				this.deleted = user.deleted;
+				this.followersArr = this.user.followers;
+				this.followingArr = this.user.following;
+      			this.isFollowing = this.arrayContains(user.followers, this.afAuth.auth.currentUser.uid);
 				let index= 0;
 				for (let i = this.posts; i >= 1; i--) {
 					if (!this.arrayContains(user.deleted, i.toString())) {
@@ -87,8 +109,79 @@ export class ViewProfileComponent implements OnInit {
 			.getDownloadURL();
 		}
 
+		goTo(posts, uid) {
+			this.router.navigate(['/post/' + 'cw40zIGCEkTXTK6ry2AWJf4gtBs1' + '-' + posts]);
+		}
+
+		// adds the current User's uid to the array of followers of the account user
+		followUser(curr) {
+			const currentUid = this.afAuth.auth.currentUser.uid;
+			curr.following.push(this.uid);
+			this.followersArr.push(currentUid);
+			this.afs.doc(`users/${this.uid}`).set({
+				firstName: this.firstName,
+				lastName: this.lastName,
+				displayName: this.displayName,
+				email: this.email,
+				uid: this.uid,
+				bio: this.bio,
+				posts: this.posts,
+				deleted: this.deleted,
+				followers: this.followersArr,
+				following: this.followingArr,
+			});
+			this.afs.doc(`users/${currentUid}`).set({
+				firstName: curr.firstName,
+				lastName: curr.lastName,
+				displayName: curr.displayName,
+				email: curr.email,
+				uid: currentUid,
+				bio: curr.bio,
+				posts: curr.posts,
+				deleted: curr.deleted,
+				followers: curr.followers,
+				following: curr.following,
+			});
+			window.alert("Successfully Followed");
+			this.router.navigate(['/account/' + this.uid]);
+		}
+
+		// Unfollows a user
+		unFollowUser(curr) {
+			const currentUid = this.afAuth.auth.currentUser.uid;
+			const newFollowers = this.removeElement(this.followersArr, currentUid);
+			const newFollowing = this.removeElement(this.followingArr, this.uid);
+			this.afs.doc(`users/${this.uid}`).set({
+				firstName: this.firstName,
+				lastName: this.lastName,
+				displayName: this.displayName,
+				email: this.email,
+				uid: this.uid,
+				bio: this.bio,
+				posts: this.posts,
+				deleted: this.deleted,
+				followers: newFollowers,
+				following: this.followingArr,
+			});
+			this.afs.doc(`users/${currentUid}`).set({
+				firstName: curr.firstName,
+				lastName: curr.lastName,
+				displayName: curr.displayName,
+				email: curr.email,
+				uid: currentUid,
+				bio: curr.bio,
+				posts: curr.posts,
+				deleted: curr.deleted,
+				followers: curr.followers,
+				following: newFollowing,
+			});
+			window.alert("Successfully Unfollowed");
+			this.router.navigate(['/account/' + this.uid]);
+		}
+
+		// returns true if element i is in array arr, otherwise false
 		arrayContains(arr, i) {
-			for (let index = 0; index <= arr.length; index++) {
+			for (let index = 0; index < arr.length; index++) {
 				if (arr[index] === i) {
 					return true;
 				}
@@ -96,33 +189,41 @@ export class ViewProfileComponent implements OnInit {
 			return false;
 		}
 
-		goTo(posts, uid) {
-			this.router.navigate(['/post/' + 'cw40zIGCEkTXTK6ry2AWJf4gtBs1' + '-' + posts]);
+		// removes an element elt from array arr
+		removeElement(arr, elt) {
+			const index = arr.indexOf(elt);
+			arr.splice(index, 1);
+			// for (let i = 0; i < arr.length; i++) {
+			// 	if (arr[i] === elt) {
+			// 		arr.splice(i, 1);
+			// 	}
+			// }
+			return arr;
 		}
 
-		async setPosts() {
-			await this.auth.user.subscribe(user => {
-				return user.posts;
-			})
-		}
+		// async setPosts() {
+		// 	await this.auth.user.subscribe(user => {
+		// 		return user.posts;
+		// 	})
+		// }
 
-		async getPosts() {
-			let promise = this.auth.user.subscribe(user => {
-				(user.posts);
-			});
+		// async getPosts() {
+		// 	let promise = this.auth.user.subscribe(user => {
+		// 		(user.posts);
+		// 	});
 
-			this.posts = await promise;
-		}
+		// 	this.posts = await promise;
+		// }
 
-		async getUser(user) {
-			await user.subscribe(user => {
-				return user
-			});
-		}
+		// async getUser(user) {
+		// 	await user.subscribe(user => {
+		// 		return user
+		// 	});
+		// }
 
-		getId() {
-			this.auth.getUid();
-		}
+		// getId() {
+		// 	this.auth.getUid();
+		// }
 
 		// getImageURL(uid) {
 			//   const filePath = "profiles/" + uid + "/profile-photo";
@@ -133,8 +234,8 @@ export class ViewProfileComponent implements OnInit {
 			//   return this.storage.ref(filePath).getDownloadURL();
 			// }
 
-			editProfile() {
-				this.router.navigate(['edit_profile']);
-			}
+		// 	editProfile() {
+		// 		this.router.navigate(['edit_profile']);
+		// 	}
 
 		}

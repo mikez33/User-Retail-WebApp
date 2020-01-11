@@ -25,6 +25,8 @@ import { AuthGuard } from '../../../services/auth.guard';
 })
 
 export class AccountComponent implements OnInit {
+  followers;
+  following;
   postNums = [];
   postList = [];
   profileSrc;
@@ -57,6 +59,8 @@ export class AccountComponent implements OnInit {
     this.auth.user.subscribe(user => {
       this.user = user;
       this.posts = this.user.posts;
+      this.followers = this.user.followers.length;
+      this.following = this.user.following.length;
       let index= 0;
       for (let i = this.posts; i >= 1; i--) {
         if (!this.arrayContains(user.deleted, i.toString())) {

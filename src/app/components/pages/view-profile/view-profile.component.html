@@ -5,9 +5,15 @@
 		<div class="media">
 			<img id="profile" class="rounded-circle account-img" [src]="this.profileSrc | async">
 		</div>
-		<div class="media-body">
+		<div class="media-body" *ngIf="auth.user | async as user">
 			<h4 class="text-secondary">{{ this.displayName }}</h4>
 			<p class="text-secondary">{{ this.bio }}</p>
+			<h5 class="text-secondary" style="float: left; padding-right: 10px">Followers: {{ this.followers }}</h5>
+			<h5 class="text-secondary" style="float: left">Following: {{ this.following }}</h5>
+			<br>
+			<hr>
+			<button type="button" class="btn btn-primary btn-large btn-dark" (click)="unFollowUser(user)" *ngIf="isFollowing">Following</button>
+			<button type="button" class="btn btn-primary btn-large btn-dark" (click)="followUser(user)" *ngIf="!isFollowing">Follow</button>
 		</div>
 	</div><br>
 	<hr>

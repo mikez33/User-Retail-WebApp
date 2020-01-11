@@ -110,13 +110,23 @@ export class PostComponent implements OnInit {
 			bio: user.bio,
 			posts: user.posts,
 			deleted: arr,
+			followers: user.followers,
+			following: user.following,
 		});
 		window.alert("Post Successfully Deleted");
 		this.router.navigate(['/account']);
 	}
 
 	goToAccount() {
-		this.router.navigate(['/account/' + this.uid]);
+		if (this.afAuth.auth.currentUser.uid === this.uid) {
+			this.router.navigate(['/account']);
+		} else {
+			this.router.navigate(['/account/' + this.uid]);
+		}
 	}
 
+	// Likes the user post
+	likeFunction(component) {
+		component.toggle("fa-thumbs-down");
+	}
 }

@@ -20,6 +20,8 @@ interface User {
 	bio?: string;
 	posts?: number;
 	deleted?: [];
+	followers?: string[];
+	following?: string[];
 }
 
 @Injectable({ providedIn: 'root' })
@@ -80,7 +82,9 @@ export class AuthService {
 			uid: curr.uid,
 			bio: (user.bio === "") ? prev.bio : user.bio,
 			posts: prev.posts,
-			deleted: prev.deleted
+			deleted: prev.deleted,
+			followers: prev.followers,
+			following: prev.following,
 		}).then(() => {
 			this.router.navigate(['/account']);
 		})
@@ -109,6 +113,8 @@ export class AuthService {
 			photoURL: "https://i.stack.imgur.com/dr5qp.jpg",
 			posts: 0,
 			deleted: [],
+			followers: [],
+			following: [],
 		});
 	}
 
@@ -158,6 +164,8 @@ export class AuthService {
 			bio: "this is the default bio",
 			posts: 0,
 			deleted: [],
+			followers: [],
+			following: [],
 		}
 
 		return userRef.set(data, { merge: true })
