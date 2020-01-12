@@ -58,6 +58,7 @@ export class ViewProfileComponent implements OnInit {
 	followers;
 	following;
 	isFollowing;
+	isOwner;
 	constructor(
 		public auth: AuthService, 
 		private afAuth: AngularFireAuth,
@@ -76,6 +77,9 @@ export class ViewProfileComponent implements OnInit {
 
 		ngOnInit() {
 			this.uid = this.route.snapshot.paramMap.get('id');
+			this.auth.user.subscribe(user => {
+				this.isOwner = user.uid === this.uid;
+			});
 			this.afs.doc<User>(`users/${this.uid}`).valueChanges().subscribe(user => {
 				this.user = user;
 				this.displayName = this.user.displayName;

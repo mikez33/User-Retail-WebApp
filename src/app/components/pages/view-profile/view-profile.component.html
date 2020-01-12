@@ -12,8 +12,8 @@
 			<h5 class="text-secondary" style="float: left">Following: {{ this.following }}</h5>
 			<br>
 			<hr>
-			<button type="button" class="btn btn-primary btn-large btn-dark" (click)="unFollowUser(user)" *ngIf="isFollowing">Following</button>
-			<button type="button" class="btn btn-primary btn-large btn-dark" (click)="followUser(user)" *ngIf="!isFollowing">Follow</button>
+			<button type="button" class="btn btn-primary btn-large btn-dark" (click)="unFollowUser(user)" *ngIf="isFollowing && !isOwner">Following</button>
+			<button type="button" class="btn btn-primary btn-large btn-dark" (click)="followUser(user)" *ngIf="!isFollowing && !isOwner">Follow</button>
 		</div>
 	</div><br>
 	<hr>
