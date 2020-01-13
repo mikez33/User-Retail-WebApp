@@ -1,4 +1,14 @@
-.resized{
-	height: 70%;
-	width: 70%;
+.resized {
+	height: 400px;
+	width: 400px;
+	padding-bottom: 30px;
+}
+
+.account:hover {
+	color: #A8A8A8;
+}
+
+.resized:hover {
+	color: white;
+	background-color: white;
 }

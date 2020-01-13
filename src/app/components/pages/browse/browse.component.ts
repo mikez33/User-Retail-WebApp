@@ -43,6 +43,7 @@ export class BrowseComponent implements OnInit {
 	currMeta;
 	currTime;
 	currURL;
+	currDisplayName;
 	constructor(
 		public auth: AuthService, 
     	private afAuth: AngularFireAuth,
@@ -72,6 +73,9 @@ export class BrowseComponent implements OnInit {
 								this.updateTimeList[index] = {
 									url: this.currURL,
 									meta: metadata.updated,
+									displayName: user.displayName,
+									accountLink: "/account/" + user.uid,
+									postLink : "/post/" + user.uid + "-" + j.toString(),
 								};
 								let tempIndex = index;
 								for (let k = index - 1; k >= 0; k--) {
@@ -79,13 +83,22 @@ export class BrowseComponent implements OnInit {
 									if (currTime.meta < metadata.updated) {
 										let tempURL = currTime.url;
 										let tempMeta = currTime.meta;
+										let tempDisplayName = currTime.displayName;
+										let tempAccountLink = currTime.accountLink;
+										let tempPostLink = currTime.postLink;
 										this.updateTimeList[k] = {
 											url : this.currURL,
 											meta : metadata.updated,
+											displayName : user.displayName,
+											accountLink : "/account/" + user.uid,
+											postLink : "/post/" + user.uid + "-" + j.toString(),
 										}
 										this.updateTimeList[tempIndex] = {
 											url : tempURL,
 											meta : tempMeta,
+											displayName : tempDisplayName,
+											accountLink : tempAccountLink,
+											postLink : tempPostLink,
 										}
 										tempIndex = k;
 									}
@@ -99,32 +112,23 @@ export class BrowseComponent implements OnInit {
 		});
 	}
 
-	sortByTime(arr) {
-		let res = [];
-		for (let i = 0; i < arr.length; i++) {
-			let max = arr[i].meta;
-			let url = arr[i].url;
-			for (let j = i + 1; j < arr.length; j++) {
-				if (arr[j].meta > max) {
-					max = arr[j].meta;
-					url = arr[j].url;
-				}
+	arrayContains(arr, i) {
+		for (let index = 0; index <= arr.length; index++) {
+			if (arr[index] === i) {
+				return true;
 			}
-			res.push({
-				url : url,
-				max : max,
-			});
 		}
-		return res;
+		return false;
 	}
 
-	arrayContains(arr, i) {
-    for (let index = 0; index <= arr.length; index++) {
-      if (arr[index] === i) {
-        return true;
-      }
-    }
-    return false;
-  }
+	// Go to account link
+	goToAccount(url) {
+		this.router.navigate([url]);
+	}
+
+	// Go to post link
+	goToPost(url) {
+		this.router.navigate([url]);
+	}
 
 }

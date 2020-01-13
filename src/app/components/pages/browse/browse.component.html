@@ -1,8 +1,8 @@
 <div class="row">
 	<div class="container">
 		<div class="column" *ngFor="let post of updateTimeList">
-			<img class="resized" [src]="post.url | async">
-			<p>{{ post.meta }}</p>
+			<h3 class="account" (click)="goToAccount(post.accountLink)">Sold by: {{ post.displayName}}</h3>
+			<img class="resized" [src]="post.url | async" (click)="goToPost(post.postLink)">
 		</div>
 	</div>
 </div>
