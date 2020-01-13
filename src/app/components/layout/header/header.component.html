@@ -16,6 +16,7 @@
 				</div>
 				<!-- Navbar Right Side -->
 				<div class="navbar-nav navbar-right" *ngIf="auth.user | async as user">
+					<a type="button" class="nav-item nav-link" routerLink="/browse">Browse</a>
 					<a type="button" class="nav-item nav-link" routerLink="/account">Account</a>
 					<a type="button" class="nav-item nav-link" (click)="auth.signOut()">Logout</a>
 				</div>

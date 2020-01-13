@@ -44,7 +44,6 @@ export class AccountComponent implements OnInit {
     private route: ActivatedRoute,
     public router: Router,
     public storage: AngularFireStorage,
-    public profile: EditProfileComponent
     // private db : AngularFireDatabase, 
     // private afAuth : AngularFireAuth
   ) {

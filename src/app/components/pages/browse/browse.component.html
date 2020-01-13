@@ -1,0 +1,8 @@
+<div class="row">
+	<div class="container">
+		<div class="column" *ngFor="let post of updateTimeList">
+			<img class="resized" [src]="post.url | async">
+			<p>{{ post.meta }}</p>
+		</div>
+	</div>
+</div>

@@ -22,6 +22,8 @@ interface User {
 	bio?: string;
 	posts?: number;
 	deleted?: [];
+	following?: string[];
+	followers?: string[];
 }
 
 @Component({

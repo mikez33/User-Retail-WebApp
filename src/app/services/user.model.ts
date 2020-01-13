@@ -8,5 +8,7 @@ interface User {
 	favoriteColor?: string;
 	bio?: string;
 	posts?: number;
-	deleted?: [];
+	deleted?: string[];
+	following?: string[];
+	followers?: string[];
 }

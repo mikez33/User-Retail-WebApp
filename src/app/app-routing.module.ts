@@ -11,6 +11,7 @@ import { EditProfileComponent } from './components/pages/edit-profile/edit-profi
 import { CreatePostComponent } from './components/pages/create-post/create-post.component';
 import { PostComponent } from './components/pages/post/post.component';
 import { ViewProfileComponent } from './components/pages/view-profile/view-profile.component';
+import { BrowseComponent } from './components/pages/browse/browse.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
 	{path: 'edit_profile', component: EditProfileComponent, canActivate: [AuthGuard]},
 	{path: 'create_post', component: CreatePostComponent, canActivate: [AuthGuard]},
 	{path: 'post/:id', component: PostComponent},
+	{path: 'browse', component: BrowseComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
