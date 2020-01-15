@@ -5,10 +5,24 @@
 	margin-bottom: 15px;
 }
 
+.medium-column {
+	float: right;
+	width: 32%;
+	padding: 5px;
+	margin-bottom: 15px;
+}
+
 .small-column {
 	float: left;
 	width: 33%;
 	padding: 5px;
+	margin-bottom: 15px;
+}
+
+.column-right {
+	right: 5%;
+	float: right;
+	width: 23%;
 	margin-bottom: 15px;
 }
 
@@ -26,10 +40,38 @@
 
 .mainSize {
 	height: 100%;
-	width: 80%;
+	width: 100%;
 }
 
 .resized {
 	height: 90%;
 	width: 90%;
+}
+
+#rectangle-main {
+	width: 40%;
+	height: 40%;
+	background-color: rgb(250, 250, 250);
+	color: rgb(250, 250, 250);
+	/*padding-bottom: 30px;*/
+	margin-right: 1px;
+	margin-bottom: 30px;
+	stroke: rgb(0, 0, 0);
+	border: 1px solid rgb(230, 230, 230);
+}
+
+#rectangle-side {
+	top: 225px;
+	right: 85px;
+	width: 300px;
+	height: 300px;
+	background-color: rgb(250, 250, 250);
+	color: rgb(250, 250, 250);
+	margin-bottom: 40px;
+	stroke: rgb(0, 0, 0);
+	border: 1px solid rgb(230, 230, 230);
+}
+
+.list-group-item:hover {
+	color: #A8A8A8;
 }

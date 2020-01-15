@@ -1,8 +1,32 @@
 <div class="row">
 	<div class="container">
-		<div class="column" *ngFor="let post of updateTimeList">
-			<h3 class="account" (click)="goToAccount(post.accountLink)">Sold by: {{ post.displayName}}</h3>
+		<div id="rectangle1" *ngFor="let post of updateTimeList">
+			<!-- <svg width="400" height="500">
+				<rect width="600" height="600" style="fill:rgb(236,236,236);stroke-width:0;stroke:rgb(0,0,0)" />
+			</svg> -->
+			<h5 class="account" (click)="goToAccount(post.accountLink)" style="margin-left: 5px;">Sold by: {{ post.displayName}}</h5>
+			<hr style='margin-top: 0em; margin-bottom: 0em'>
 			<img class="resized" [src]="post.url | async" (click)="goToPost(post.postLink)">
 		</div>
+	</div>
+	<div class="side-position1" *ngIf="auth.user | async as user">
+		<div class="media">
+			<img id="profile" class="image-cropper" [src]="this.profileSrc | async" routerLink="/account">
+		</div>
+		<div class="media-body">
+			<h5 class="hover-change" routerLink="/account">{{ user.displayName }}</h5>
+		</div> 
+	</div>
+	<div id="rectangle2">
+		<div class="content-section">
+        <h3>More on Open Market</h3>
+        <p class='text-muted'>Check below for the latest updates and products
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-light">Latest Updates</li>
+            <li class="list-group-item list-group-item-light">Announcements</li>
+            <li class="list-group-item list-group-item-light">Products</li>
+            <li class="list-group-item list-group-item-light" class="list-group-item list-group-item-light" routerLink="/register">Create Profile</li>
+          </ul><br>
+        </div>
 	</div>
 </div>

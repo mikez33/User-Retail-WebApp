@@ -1,11 +1,17 @@
 <div class="container">
 	<div class="row">
-		<div class="column">
+		<div id="rectangle-main" class="column">
 			<img class="mainSize" [src]="mainURL | async">
+			<hr>
+			<div *ngFor="let url of postList">
+				<img class="mainSize" [src]="url | async">
+				<hr> 					
+			</div>
 		</div>
-		<div class="column">
+		<div class="medium-column"></div>
+		<div class="column-right">
 			<h1>{{ productName }}</h1>
-			<p type="button" (click)="goToAccount()">Sold by: {{ this.displayName }}</p>
+			<p (click)="goToAccount()">Sold by: {{ this.displayName }}</p>
 			<p>Price: ${{ price }}</p>
 			<h5>Description: </h5>
 			<h6>{{ description }}</h6>
@@ -13,13 +19,19 @@
 			<div *ngIf="this.isAuthenticated">
 				<button class="btn btn-primary btn-dark" (click)="delete(user)">Delete</button>
 			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div *ngFor="let url of postList">
-			<div class="small-column">
-				<img class="resized" [src]="url | async"> 
-			</div>
+			<br>
+			<div id="rectangle-side">
+				<div class="content-section">
+					<h3>More on Open Market</h3>
+					<p class='text-muted'>Check below for the latest updates and products
+						<ul class="list-group">
+							<li class="list-group-item list-group-item-light">Latest Updates</li>
+							<li class="list-group-item list-group-item-light">Announcements</li>
+							<li class="list-group-item list-group-item-light">Products</li>
+							<li class="list-group-item list-group-item-light" class="list-group-item list-group-item-light" routerLink="/register">Create Profile</li>
+						</ul><br>
+					</div>
+				</div>
 		</div>
 	</div>
 </div>

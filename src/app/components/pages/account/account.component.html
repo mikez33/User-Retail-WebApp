@@ -21,7 +21,7 @@
 </div>
 <div class="row">
 	<div class="container">
-		<div class="column" *ngFor="let post of postList">
+		<div id="rectangle" class="column" *ngFor="let post of postList">
 			<img class="resized" [src]="post.url | async" (click)="this.goTo(post.id)">
 		</div>
 	</div>

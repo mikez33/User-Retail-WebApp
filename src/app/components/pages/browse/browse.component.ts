@@ -36,7 +36,7 @@ export class BrowseComponent implements OnInit {
 	finalList = [];
 	updateTimeList = []; // list of times when posts were last updated
 	uidPostList = [];
-	map; // maps an update time to the download URL
+	profileSrc;
 	following;
 	currUid;
 	currPosts;
@@ -53,7 +53,8 @@ export class BrowseComponent implements OnInit {
     ) { }
 
 	ngOnInit() {
-		this.map = new Map([]);
+		this.profileSrc = this.storage.ref("profiles/" + this.afAuth.auth.currentUser.uid + "/profile-photo")
+        .getDownloadURL();
 		this.afs.doc<User>(`users/${this.afAuth.auth.currentUser.uid}`).valueChanges()
 		.subscribe(user => {
 			this.following = user.following;
