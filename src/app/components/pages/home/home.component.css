@@ -80,3 +80,13 @@ a.article-title:hover {
 .account-heading {
   font-size: 2.5rem;
 }
+
+.content-section {
+  width: 70%;
+  position: absolute;
+  right: 10px;
+}
+
+.list-group-item:hover {
+  color: #A8A8A8;
+}

@@ -19,7 +19,7 @@ interface User {
 	favoriteColor?: string;
 	bio?: string;
 	posts?: number;
-	deleted?: [];
+	deleted?: string[];
 	followers?: string[];
 	following?: string[];
 }
@@ -59,12 +59,12 @@ export class AuthService {
 				this.newUser = user;	
 				console.log(userCredential);
 				userCredential.user.updateProfile({
-					displayName: user.firstName + ' ' + user.lastName
+					displayName: user.firstName + ' ' + user.lastName,
 				});
 
 				this.insertUserData(userCredential, user.firstName, user.lastName)
 					.then(() => {
-						this.router.navigate(['/home'])
+						this.router.navigate(['/browse']);
 					});
 			})
 			.catch(error => {
@@ -103,7 +103,7 @@ export class AuthService {
 	}
 
 	insertUserData(userCredential: firebase.auth.UserCredential, first: string, last: string) {
-		return this.afs.doc(`users/${userCredential.user.uid}`).set({
+		return this.afs.doc<User>(`users/${userCredential.user.uid}`).set({
 			displayName: first + ' ' + last,
 			firstName: first,
 			lastName: last,

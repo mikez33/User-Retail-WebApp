@@ -58,3 +58,30 @@ body {
 button ~ button {
   margin-left: 20px;
 }
+
+#rectangle1 {
+  width: 450px;
+  height: 525px;
+  background-color: rgb(250, 250, 250);
+  color: rgb(250, 250, 250);
+  /*padding-bottom: 30px;*/
+  margin-bottom: 40px;
+  stroke: rgb(0, 0, 0);
+  border: 1px solid rgb(230, 230, 230);
+}
+
+#rectangle2 {
+  width: 450px;
+  height: 65px;
+  background-color: rgb(250, 250, 250);
+  color: rgb(250, 250, 250);
+  /*padding-bottom: 30px;*/
+  margin-bottom: 40px;
+  stroke: rgb(0, 0, 0);
+  border: 1px solid rgb(230, 230, 230);
+}
+
+button{
+    margin: 0 auto;
+    width: 418px;
+}
