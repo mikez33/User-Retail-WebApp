@@ -90,3 +90,9 @@ a.article-title:hover {
 .list-group-item:hover {
   color: #A8A8A8;
 }
+
+.jumbotron {
+  background-image: url(https://firebasestorage.googleapis.com/v0/b/user-retail-webapp.appspot.com/o/Samples%2Fjumbotron4.jpg?alt=media&token=e06592bf-5c83-4892-ad23-edd47c04b733);
+  background-size: cover;
+  opacity: 0.75;
+}

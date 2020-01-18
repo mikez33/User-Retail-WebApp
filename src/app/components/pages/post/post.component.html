@@ -16,7 +16,7 @@
 			<h5>Description: </h5>
 			<h6>{{ description }}</h6>
 			<button class="btn btn-primary btn-dark">Add to bag</button><br><br>
-			<div *ngIf="this.isAuthenticated">
+			<div *ngIf="this.isAuthenticated && auth.user | async as user">
 				<button class="btn btn-primary btn-dark" (click)="delete(user)">Delete</button>
 			</div>
 			<br>

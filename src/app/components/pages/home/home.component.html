@@ -1,9 +1,9 @@
 <app-header></app-header>
 <router-outlet></router-outlet>
-<div class="jumbotron jumbotron-fluid">
+<div class="jumbotron jumbotron-fluid" style="height: 300%;">
   <div class="container">
-    <h1 class="display-4">Open Market</h1>
-    <p class="lead">Build Your Personal Online Retail Profile</p>
+    <h1 class="display-4" style="color: black">Open Market</h1>
+    <p class="lead" style="color: black">Build Your Own Online Retail Profile</p>
     <a class="btn btn-primary btn-lg" role="button" routerLink="login">Get Started </a>
   </div>  
 </div> 
@@ -11,16 +11,13 @@
   <h3>Shop by Brands</h3><br>
   <div class="row">
     <div class="col">
-      <img src="https://source.unsplash.com/random/399x299" width="100%">
-      insert statement
+      <img [src]="this.logo1 | async" style="border: 1px solid rgb(0, 0, 0);" width="100%">
     </div>
     <div class="col">
-      <img src="https://source.unsplash.com/random/400x300" width="100%">
-      insert statement
+      <img [src]="this.logo2 | async" style="border: 1px solid rgb(0, 0, 0);" width="100%">
     </div>
     <div class="col">
-      <img src="https://source.unsplash.com/random/401x301" width="100%">
-      insert statement
+      <img [src]="this.logo3 | async" style="border: 1px solid rgb(0, 0, 0);" width="100%">
     </div>
     <div class="col-md-4">
       <div class="content-section">
@@ -51,19 +48,15 @@
   <h3>Top Picks</h3><br>
   <div class="row" style="width: 68.5%">
     <div class="col">
-      <img src="https://source.unsplash.com/random/399x299" width="100%">
-      insert statement
+      <img [src]="this.top1 | async" style="border: 1px solid rgb(0, 0, 0);" width="100%" height="100%">
     </div>
     <div class="col">
-      <img src="https://source.unsplash.com/random/400x300" width="100%">
-      insert statement
+      <img [src]="this.top2 | async" style="border: 1px solid rgb(0, 0, 0);" width="100%" height="100%">
     </div>
     <div class="col">
-      <img src="https://source.unsplash.com/random/401x301" width="100%">
-      insert statement
+      <img [src]="this.top3 | async" style="border: 1px solid rgb(0, 0, 0);" width="100%" height="100%">
     </div>
-  </div>
-  <br>
+  </div><br>
   <h3>New Users</h3><br>
   <div class="row" style="width: 68.5%">
     <div class="col">
@@ -80,4 +73,5 @@
     </div>
   </div>
 </div>
+
 

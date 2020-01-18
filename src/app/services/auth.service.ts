@@ -64,7 +64,7 @@ export class AuthService {
 
 				this.insertUserData(userCredential, user.firstName, user.lastName)
 					.then(() => {
-						this.router.navigate(['/browse']);
+						this.router.navigate(['home']);
 					});
 			})
 			.catch(error => {
@@ -125,7 +125,7 @@ export class AuthService {
 			})
 			.then(userCredential => {
 				if (userCredential) {
-					this.router.navigate(['/home']);
+					this.router.navigate(['/browse']);
 				}
 			});
 	}
@@ -140,9 +140,9 @@ export class AuthService {
 		.then((credential) => {
 			if (credential.additionalUserInfo.isNewUser) {
 				this.updateUserData(credential.user);
-				this.router.navigate(['home']);
+				this.router.navigate(['/browse']);
 			} else {
-				this.router.navigate(['home']);
+				this.router.navigate(['/browse']);
 			}
 			//this.updateUserData(credential.user)
 		})
